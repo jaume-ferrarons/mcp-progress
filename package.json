@@ -1,0 +1,21 @@
+{
+  "name": "mcp-progress",
+  "version": "1.0.0",
+  "type": "module",
+  "main": "index.js",
+  "bin": {
+    "mcp-progress": "./index.js"
+  },
+  "scripts": {
+    "start": "node index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": ["mcp", "notifications", "progress", "server"],
+  "author": "",
+  "license": "ISC",
+  "description": "MCP server with notifications and progress tracking",
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.25.1",
+    "node-notifier": "^10.0.1"
+  }
+}
