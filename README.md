@@ -9,7 +9,23 @@ An MCP (Model Context Protocol) server that provides notifications and progress 
 
 ## Installation
 
+### For use with npx (recommended)
+
 ```bash
+npx mcp-progress
+```
+
+### For global installation
+
+```bash
+npm install -g mcp-progress
+```
+
+### For local development
+
+```bash
+git clone git@github.com:jaume-ferrarons/mcp-progress.git
+cd mcp-progress
 npm install
 ```
 
@@ -139,8 +155,20 @@ Add to your MCP client configuration:
 {
   "mcpServers": {
     "progress": {
-      "command": "node",
-      "args": ["/path/to/mcp-progress/index.js"]
+      "command": "npx",
+      "args": ["-y", "mcp-progress"]
+    }
+  }
+}
+```
+
+Or if installed globally:
+
+```json
+{
+  "mcpServers": {
+    "progress": {
+      "command": "mcp-progress"
     }
   }
 }

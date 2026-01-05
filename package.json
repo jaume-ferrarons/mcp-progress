@@ -10,10 +10,28 @@
     "start": "node index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "keywords": ["mcp", "notifications", "progress", "server"],
-  "author": "",
+  "keywords": [
+    "mcp",
+    "notifications",
+    "progress",
+    "server",
+    "model-context-protocol"
+  ],
+  "author": "JaumeF",
+  "url": "https://github.com/jaume-ferrarons/mcp-progress",
   "license": "ISC",
   "description": "MCP server with notifications and progress tracking",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/yourusername/mcp-progress.git"
+  },
+  "files": [
+    "index.js",
+    "README.md"
+  ],
+  "engines": {
+    "node": ">=18.0.0"
+  },
   "dependencies": {
     "@modelcontextprotocol/sdk": "^1.25.1",
     "node-notifier": "^10.0.1"
