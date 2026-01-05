@@ -1,11 +1,15 @@
 #!/usr/bin/env node
 
-import { McpServer } from '@modelcontextprotocol/sdk/server/mcp.js';
+import { Server } from '@modelcontextprotocol/sdk/server/index.js';
 import { StdioServerTransport } from '@modelcontextprotocol/sdk/server/stdio.js';
+import {
+  CallToolRequestSchema,
+  ListToolsRequestSchema,
+} from '@modelcontextprotocol/sdk/types.js';
 import notifier from 'node-notifier';
 import { createTools } from './src/tools.js';
 
-const server = new McpServer(
+const server = new Server(
   {
     name: 'mcp-progress',
     version: '1.0.0',
@@ -13,16 +17,41 @@ const server = new McpServer(
   {
     capabilities: {
       tools: {},
-      prompts: {},
     },
   }
 );
 
-const { tools } = createTools(notifier);
+const { tools, progressManager } = createTools(notifier);
 
-// Register all tools
-Object.entries(tools).forEach(([name, { config, handler }]) => {
-  server.registerTool(name, config, handler);
+// Register list tools handler
+server.setRequestHandler(ListToolsRequestSchema, async () => {
+  return {
+    tools: Object.entries(tools).map(([name, { config }]) => ({
+      name,
+      description: config.description,
+      inputSchema: config.inputSchema,
+    })),
+  };
+});
+
+// Register call tool handler
+server.setRequestHandler(CallToolRequestSchema, async (request) => {
+  const { name, arguments: args } = request.params;
+  const tool = tools[name];
+
+  if (!tool) {
+    return {
+      content: [
+        {
+          type: 'text',
+          text: `Unknown tool: ${name}`,
+        },
+      ],
+      isError: true,
+    };
+  }
+
+  return tool.handler(args || {});
 });
 
 async function main() {
@@ -35,3 +64,5 @@ main().catch((error) => {
   console.error('Server error:', error);
   process.exit(1);
 });
+
+export { progressManager };

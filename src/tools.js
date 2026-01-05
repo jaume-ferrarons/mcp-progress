@@ -30,9 +30,8 @@ export function createTools(notifier, progressManager = new ProgressManager()) {
         notifier.notify({
           title,
           message,
-          sound,
-          wait: true,
-          closeLabel: 'Close',
+          sound: sound ? 'default' : false,
+          wait: false,
         });
 
         return createToolResult(`Notification sent: "${title}"`);
@@ -70,8 +69,7 @@ export function createTools(notifier, progressManager = new ProgressManager()) {
             title,
             message: progressText,
             sound: false,
-            wait: true,
-            closeLabel: 'Close',
+            wait: false,
           });
 
           return createToolResult(`Progress started: "${title}" (token: ${progressToken})`);
@@ -119,8 +117,7 @@ export function createTools(notifier, progressManager = new ProgressManager()) {
             title: progress.title,
             message: notificationMessage,
             sound: false,
-            wait: true,
-            closeLabel: 'Close',
+            wait: false,
           });
 
           const responseText = `Progress updated: ${current}${progress.total ? `/${progress.total}` : ''}${percentageStr}${message ? ` - ${message}` : ''}`;
@@ -157,9 +154,8 @@ export function createTools(notifier, progressManager = new ProgressManager()) {
           notifier.notify({
             title: `✓ ${progress.title}`,
             message: completionMessage,
-            sound: true,
-            wait: true,
-            closeLabel: 'Close',
+            sound: 'default',
+            wait: false,
           });
 
           return createToolResult(`Progress completed: "${progress.title}" (${duration}s)${message ? ` - ${message}` : ''}`);

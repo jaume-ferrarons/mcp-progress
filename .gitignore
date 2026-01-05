@@ -3,3 +3,4 @@ npm-debug.log
 .DS_Store
 *.log
 .vscode/
+test-client.js
