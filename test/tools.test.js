@@ -32,8 +32,7 @@ describe('Tools', () => {
         title: 'Test Title',
         message: 'Test Message',
         sound: false,
-        wait: true,
-        closeLabel: 'Close',
+        wait: false,
       });
 
       expect(result.content[0].text).to.equal('Notification sent: "Test Title"');
@@ -46,7 +45,7 @@ describe('Tools', () => {
         sound: true,
       });
 
-      expect(notifications[0].sound).to.be.true;
+      expect(notifications[0].sound).to.equal('default');
     });
   });
 
@@ -165,7 +164,7 @@ describe('Tools', () => {
       expect(result.content[0].text).to.match(/^Progress completed: "Test Task" \(\d+\.\d{2}s\)$/);
       expect(notifications[0].title).to.equal('✓ Test Task');
       expect(notifications[0].message).to.match(/^Completed in \d+\.\d{2}s$/);
-      expect(notifications[0].sound).to.be.true;
+      expect(notifications[0].sound).to.equal('default');
     });
 
     it('should complete progress with custom message', async () => {

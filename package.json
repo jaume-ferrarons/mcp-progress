@@ -25,7 +25,7 @@
   "description": "MCP server with notifications and progress tracking",
   "repository": {
     "type": "git",
-    "url": "https://github.com/yourusername/mcp-progress.git"
+    "url": "https://github.com/jaume-ferrarons/mcp-progress.git"
   },
   "files": [
     "index.js",
